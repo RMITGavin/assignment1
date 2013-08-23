@@ -31,4 +31,5 @@ div.error
         {
             color: #6666FF;
             background-color: #FFFFFF;
+	     text-align: center;
         }
