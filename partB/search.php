@@ -13,12 +13,12 @@
 		<div id="formcontainer">
 			<div class="row">
 				<span class="label">Wine Name::</span>
-				<span class="formw"><input type="text" size="25" id="wineName" name="wineName" value="<?php echo $_POST['wineName']; ?>"/></span>
+				<span class="formw"><input type="text" size="25" id="wineName" name="wineName" value="<?php echo $_GET['wineName']; ?>"/></span>
 			</div>
 			
 			<div class="row">
                   <span class="label">Winery Name:</span>
-                  <span class="formw"><input type="text" size="25" id="wineryName" name="wineryName" value="<?php echo $_POST['wineryName']; ?>"/></span>
+                  <span class="formw"><input type="text" size="25" id="wineryName" name="wineryName" value="<?php echo $_GET['wineryName']; ?>"/></span>
              </div>
 		
 			<div class="row">
@@ -47,18 +47,18 @@
 			 
 			 <div class="row">
                   <span class="label">Minimum Number In Stock:</span>
-                  <span class="formw"><input type="text" size="25" id="minStockNo" name="minStockNo" value="<?php echo $_POST['minStockNo']; ?>"/></span>
+                  <span class="formw"><input type="text" size="25" id="minStockNo" name="minStockNo" value="<?php echo $_GET['minStockNo']; ?>"/></span>
              </div>
 			 
 			 <div class="row">
                   <span class="label">Minimum Number Ordered:</span>
-                  <span class="formw"><input type="text" size="25" id="minOrderedNo" name="minOrderedNo" value="<?php echo $_POST['minOrderedNo']; ?>"/></span>
+                  <span class="formw"><input type="text" size="25" id="minOrderedNo" name="minOrderedNo" value="<?php echo $_GET['minOrderedNo']; ?>"/></span>
              </div>
 			 <?php echo "<div class='error'>".$msg_yearRang."</div>";?>
 			 
 			 <div class="row">
                   <span class="label">Cost:</span>
-                  <span class="formw"><input type="text" size="10" id="minCost" name="minCost" value="<?php echo $_POST['minCost']; ?>"/> to <input type="text" size="10" id="maxCost" name="maxCost" value="<?php echo $_POST['maxCost']; ?>"/></span>
+                  <span class="formw"><input type="text" size="10" id="minCost" name="minCost" value="<?php echo $_GET['minCost']; ?>"/> to <input type="text" size="10" id="maxCost" name="maxCost" value="<?php echo $_GET['maxCost']; ?>"/></span>
              </div>
 			 <?php echo "<div class='error'>".$msg_cost."</div>";?>
 			 
