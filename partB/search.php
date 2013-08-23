@@ -1,10 +1,21 @@
 <?php
 
-  require 'db.php';
-  function showerror() {
-     die("Error " . mysql_errno() . " : " . mysql_error());
-  }
+	require_once('db.php');
+	function showerror() 
+	{
+		die("Error " . mysql_errno() . " : " . mysql_error());
+	}
+  
+	if (!($connection = @mysql_connect(DB_HOST, DB_USER, DB_PW))) 
+	{
+		die("Could not connect");
+	}
+	if (!(@ mysql_select_db("winestor", $connection)))
+	{
+		showerror();
+	}
 
+  
 ?>
 
 
