@@ -1,3 +1,13 @@
+<?php
+
+  require 'db.php';
+  function showerror() {
+     die("Error " . mysql_errno() . " : " . mysql_error());
+  }
+
+?>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -13,12 +23,12 @@
 		<div id="formcontainer">
 			<div class="row">
 				<span class="label">Wine Name::</span>
-				<span class="formw"><input type="text" size="25" id="wineName" name="wineName" value="<?php echo $_GET['wineName']; ?>"/></span>
+				<span class="formw"><input type="text" size="20" id="wineName" name="wineName" value="<?php echo $_GET['wineName']; ?>"/></span>
 			</div>
 			
 			<div class="row">
                   <span class="label">Winery Name:</span>
-                  <span class="formw"><input type="text" size="25" id="wineryName" name="wineryName" value="<?php echo $_GET['wineryName']; ?>"/></span>
+                  <span class="formw"><input type="text" size="20" id="wineryName" name="wineryName" value="<?php echo $_GET['wineryName']; ?>"/></span>
              </div>
 		
 			<div class="row">
@@ -47,18 +57,18 @@
 			 
 			 <div class="row">
                   <span class="label">Minimum Number In Stock:</span>
-                  <span class="formw"><input type="text" size="25" id="minStockNo" name="minStockNo" value="<?php echo $_GET['minStockNo']; ?>"/></span>
+                  <span class="formw"><input type="text" size="15" id="minStockNo" name="minStockNo" value="<?php echo $_GET['minStockNo']; ?>"/></span>
              </div>
 			 
 			 <div class="row">
                   <span class="label">Minimum Number Ordered:</span>
-                  <span class="formw"><input type="text" size="25" id="minOrderedNo" name="minOrderedNo" value="<?php echo $_GET['minOrderedNo']; ?>"/></span>
+                  <span class="formw"><input type="text" size="15" id="minOrderedNo" name="minOrderedNo" value="<?php echo $_GET['minOrderedNo']; ?>"/></span>
              </div>
 			 <?php echo "<div class='error'>".$msg_yearRang."</div>";?>
 			 
 			 <div class="row">
                   <span class="label">Cost:</span>
-                  <span class="formw"><input type="text" size="10" id="minCost" name="minCost" value="<?php echo $_GET['minCost']; ?>"/> to <input type="text" size="10" id="maxCost" name="maxCost" value="<?php echo $_GET['maxCost']; ?>"/></span>
+                  <span class="formw">$<input type="text" size="10" id="minCost" name="minCost" value="<?php echo $_GET['minCost']; ?>"/> to $<input type="text" size="10" id="maxCost" name="maxCost" value="<?php echo $_GET['maxCost']; ?>"/></span>
              </div>
 			 <?php echo "<div class='error'>".$msg_cost."</div>";?>
 			 
@@ -71,3 +81,5 @@
 			
  
  </body>
+ 
+ </html>
