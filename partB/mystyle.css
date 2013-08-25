@@ -1,6 +1,6 @@
 #formcontainer
 	{
-	width:450px;
+	width:550px;
 	margin:0 auto;
 	padding-top:20px;
 	}
@@ -13,7 +13,7 @@ div.row
 span.label 
 	{
 	float: left;
-	width: 100px;
+	width: 200px;
 	text-align: right;
 	}
 span.formw 
@@ -29,7 +29,7 @@ div.error
 	}
 .auto-style2
         {
+	     text-align: center;
             color: #6666FF;
             background-color: #FFFFFF;
-	     text-align: center;
         }
