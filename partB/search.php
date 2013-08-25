@@ -1,4 +1,9 @@
 <?php
+	require_once ('db.php');
+	function showerror() 
+	{
+		die("Error " . mysql_errno() . " : " . mysql_error());
+	}
 	$msg_yearRange="";
 	$msg_cost="";
 	$wineName="";
@@ -19,7 +24,30 @@
 		$maxCost=$_GET['maxCost'];
 	}
 	
-
+	
+// Connect to the MySQL server
+					if (!($connection = @ mysql_connect(DB_HOST, DB_USER, DB_PW))) 
+					{
+						die("Could not connect");
+					}
+					//Open the database connection
+					if (!mysql_select_db(DB_NAME, $connection)) 
+					{
+						showerror();
+					}
+					//Run the query on the winestore through the connection
+					$query = "select variety from grape_variety";
+					$result = mysql_query($query, $connection);
+					while ($row = mysql_fetch_row($result)) 
+					{
+						echo $row[0] ;
+					}
+					 
+					while ($row = mysql_fetch_row($result)) 
+					{
+						echo $row[0] ;
+					}
+					
   
 ?>
 
@@ -50,12 +78,34 @@
 			<div class="row">
                   <span class="label">Grape Variety:</span>
                   <span class="formw">
-                     <select id ="grapeVariety" name="grapeVariety">
-                       
-                     </select>
+					<select id ="grapeVariety" name="grapeVariety">
+					<?php
+					// Connect to the MySQL server
+					if (!($connection = @ mysql_connect(DB_HOST, DB_USER, DB_PW))) 
+					{
+						die("Could not connect");
+					}
+					//Open the database connection
+					if (!mysql_select_db(DB_NAME, $connection)) 
+					{
+						showerror();
+					}
+					//Run the query on the winestore through the connection
+					$query = "select variety from grape_variety";
+					$result = mysql_query($query, $connection);
+					while ($row = mysql_fetch_row($result)) 
+					{
+						echo "<option>$row[0]</option>";
+					}
+					mysql_close($connection); 
+					
+					?>
+					
+                    </select>
+					
                   </span>
              </div>
-			 
+
 			 <div class="row">
                   <span class="label">Range of Years:</span>
                   <span class="formw">
