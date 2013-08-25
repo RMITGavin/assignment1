@@ -2,6 +2,7 @@
 	$msg_yearRange="";
 	$msg_cost="";
 	$wineName="";
+	$wineryName="";
 	$minStockNo="";
 	$minOrderedNo="";
 	$minCost="";
@@ -16,8 +17,6 @@
 		
 		$minCost=$_GET['minCost'];
 		$maxCost=$_GET['maxCost'];
-		
-		echo $wineName;
 	}
 	
 
@@ -79,7 +78,7 @@
 			 
 			 <div class="row">
                   <span class="label">Minimum Number Ordered:</span>
-                  <span class="formw"><input type="text" size="15" id="minOrderedNo" name="minOrderedNo" value="<?php echo $minOrderNo; ?>"/></span>
+                  <span class="formw"><input type="text" size="15" id="minOrderedNo" name="minOrderedNo" value="<?php echo $minOrderedNo; ?>"/></span>
              </div>
 			 
 			 
