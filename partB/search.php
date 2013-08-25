@@ -90,19 +90,18 @@
 					{
 						showerror();
 					}
-					//Run the query on the winestore through the connection
-					$query = "select variety from grape_variety";
-					$result = mysql_query($query, $connection);
-					while ($row = mysql_fetch_row($result)) 
+					//Run the query on the winestore through the connection get variety
+					$queryVariety = "select variety from grape_variety";
+					$resultVariety = mysql_query($queryVariety, $connection);
+					while ($row = mysql_fetch_row($resultVariety)) 
 					{
-						echo "<option>$row[0]</option>";
+						echo "\n".'<option value ="' .$row[0].'">'.$row[0]."</option>";
 					}
-					mysql_close($connection); 
+					
 					
 					?>
 					
                     </select>
-					
                   </span>
              </div>
 
@@ -110,11 +109,34 @@
                   <span class="label">Range of Years:</span>
                   <span class="formw">
                      <select id ="startYear" name="startYear">
-                       
+                    <?php
+					
+					//Run the query on the winestore through the connection to get year
+					$queryYear = "select distinct year from wine order by year";
+					$resultYear = mysql_query($queryYear, $connection);
+					//populate drop-down list
+					while ($row = mysql_fetch_row($resultYear)) 
+					{
+						echo "\n".'<option value ="' .$row[0].'">'.$row[0]."</option>";
+					}
+
+					
+					?>
                      </select>
 					 to
 					 <select id ="endYear" name="endYear">
-                        
+					 <?php
+                        //Run the query on the winestore through the connection to get year
+					$queryYear = "select distinct year from wine order by year";
+					$resultYear = mysql_query($queryYear, $connection);
+					//populate drop-down list
+					while ($row = mysql_fetch_row($resultYear)) 
+					{
+						echo "\n".'<option value ="' .$row[0].'">'.$row[0]."</option>";
+					}
+					mysql_close($connection); 
+					
+					?>
                      </select>
                   </span>
              </div>
