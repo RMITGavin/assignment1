@@ -45,7 +45,7 @@
 			
 			<div class="row">
                   <span class="label">Winery Name:</span>
-                  <span class="formw"><input type="text" size="20" id="wineryName" name="wineryName" value=""/></span>
+                  <span class="formw"><input type="text" size="20" id="wineryName" name="wineryName" value="<?php echo $wineryName; ?>"/></span>
              </div>
 		
 			<div class="row">
@@ -74,18 +74,18 @@
 			 
 			 <div class="row">
                   <span class="label">Minimum Number In Stock:</span>
-                  <span class="formw"><input type="text" size="15" id="minStockNo" name="minStockNo" value=""/></span>
+                  <span class="formw"><input type="text" size="15" id="minStockNo" name="minStockNo" value="<?php echo $minStockNo; ?>"/></span>
              </div>
 			 
 			 <div class="row">
                   <span class="label">Minimum Number Ordered:</span>
-                  <span class="formw"><input type="text" size="15" id="minOrderedNo" name="minOrderedNo" value=""/></span>
+                  <span class="formw"><input type="text" size="15" id="minOrderedNo" name="minOrderedNo" value="<?php echo $minOrderNo; ?>"/></span>
              </div>
 			 
 			 
 			 <div class="row">
                   <span class="label">Cost:</span>
-                  <span class="formw">$<input type="text" size="10" id="minCost" name="minCost" value=""/> to $<input type="text" size="10" id="maxCost" name="maxCost" value=""/></span>
+                  <span class="formw">$<input type="text" size="10" id="minCost" name="minCost" value="<?php echo $minCost; ?>"/> to $<input type="text" size="10" id="maxCost" name="maxCost" value="<?php echo $maxCost; ?>"/></span>
              </div>
 			 <?php echo "<div class='error'>".$msg_cost."</div>";?>
 			 
