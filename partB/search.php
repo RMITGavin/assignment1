@@ -4,6 +4,29 @@
 	{
 		die("Error " . mysql_errno() . " : " . mysql_error());
 	}
+	function showdropdownlist($querycontent)
+	{
+		// Connect to the MySQL server
+		if (!($connection = @ mysql_connect(DB_HOST, DB_USER, DB_PW))) 
+		{
+			die("Could not connect");
+		}
+		//Open the database connection
+		if (!mysql_select_db(DB_NAME, $connection)) 
+		{
+			showerror();
+		}
+		//Run the query on the winestore through the connection get variety
+		$query = $querycontent;
+		$result = mysql_query($query, $connection);
+		//populate drop-down list
+		while ($row = mysql_fetch_row($result)) 
+		{
+			echo "\n".'<option value ="' .$row[0].'">'.$row[0]."</option>";
+		}	
+		mysql_close($connection); 
+	}
+	
 	$msg_yearRange="";
 	$msg_cost="";
 	$wineName="";
@@ -25,29 +48,6 @@
 	}
 	
 	
-// Connect to the MySQL server
-					if (!($connection = @ mysql_connect(DB_HOST, DB_USER, DB_PW))) 
-					{
-						die("Could not connect");
-					}
-					//Open the database connection
-					if (!mysql_select_db(DB_NAME, $connection)) 
-					{
-						showerror();
-					}
-					//Run the query on the winestore through the connection
-					$query = "select variety from grape_variety";
-					$result = mysql_query($query, $connection);
-					while ($row = mysql_fetch_row($result)) 
-					{
-						echo $row[0] ;
-					}
-					 
-					while ($row = mysql_fetch_row($result)) 
-					{
-						echo $row[0] ;
-					}
-					
   
 ?>
 
@@ -80,25 +80,7 @@
                   <span class="formw">
 					<select id ="grapeVariety" name="grapeVariety">
 					<?php
-					// Connect to the MySQL server
-					if (!($connection = @ mysql_connect(DB_HOST, DB_USER, DB_PW))) 
-					{
-						die("Could not connect");
-					}
-					//Open the database connection
-					if (!mysql_select_db(DB_NAME, $connection)) 
-					{
-						showerror();
-					}
-					//Run the query on the winestore through the connection get variety
-					$queryVariety = "select variety from grape_variety";
-					$resultVariety = mysql_query($queryVariety, $connection);
-					while ($row = mysql_fetch_row($resultVariety)) 
-					{
-						echo "\n".'<option value ="' .$row[0].'">'.$row[0]."</option>";
-					}
-					
-					
+						showdropdownlist("select variety from grape_variety order by variety");
 					?>
 					
                     </select>
@@ -110,32 +92,13 @@
                   <span class="formw">
                      <select id ="startYear" name="startYear">
                     <?php
-					
-					//Run the query on the winestore through the connection to get year
-					$queryYear = "select distinct year from wine order by year";
-					$resultYear = mysql_query($queryYear, $connection);
-					//populate drop-down list
-					while ($row = mysql_fetch_row($resultYear)) 
-					{
-						echo "\n".'<option value ="' .$row[0].'">'.$row[0]."</option>";
-					}
-
-					
+						showdropdownlist("select distinct year from wine order by year");
 					?>
                      </select>
 					 to
 					 <select id ="endYear" name="endYear">
-					 <?php
-                        //Run the query on the winestore through the connection to get year
-					$queryYear = "select distinct year from wine order by year";
-					$resultYear = mysql_query($queryYear, $connection);
-					//populate drop-down list
-					while ($row = mysql_fetch_row($resultYear)) 
-					{
-						echo "\n".'<option value ="' .$row[0].'">'.$row[0]."</option>";
-					}
-					mysql_close($connection); 
-					
+					<?php
+						showdropdownlist("select distinct year from wine order by year");
 					?>
                      </select>
                   </span>
