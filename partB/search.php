@@ -1,19 +1,25 @@
 <?php
-
-	require_once('db.php');
-	function showerror() 
+	$msg_yearRange="";
+	$msg_cost="";
+	$wineName="";
+	$minStockNo="";
+	$minOrderedNo="";
+	$minCost="";
+	$maxCost="";
+	if(isset($_GET['submit']))
 	{
-		die("Error " . mysql_errno() . " : " . mysql_error());
+		
+		$wineName=trim($_GET['wineName']);
+		$wineryName= trim($_GET['wineryName']);
+		$minStockNo=trim($_GET['minStockNo']);
+		$minOrderedNo=$_GET['minOrderedNo'];
+		
+		$minCost=$_GET['minCost'];
+		$maxCost=$_GET['maxCost'];
+		
+		echo $wineName;
 	}
-  
-	if (!($connection = @mysql_connect(DB_HOST, DB_USER, DB_PW))) 
-	{
-		die("Could not connect");
-	}
-	if (!(@ mysql_select_db("winestor", $connection)))
-	{
-		showerror();
-	}
+	
 
   
 ?>
@@ -26,27 +32,27 @@
 	<title>Search WineStore</title>
 	<link rel="stylesheet" type="text/css" href="mystyle.css"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
- <head>
+ </head>
  
  <body>  
-	<h1><strong><span class="auto-style2">WineStore Mangement</span></strong></h1>
-   	<form id="search_form" method="get" action="answer.php" >
+	<h1><strong><span class="auto-style2">WineStore Management</span></strong></h1>
+   	<form id="search_form" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
 		<div id="formcontainer">
 			<div class="row">
 				<span class="label">Wine Name::</span>
-				<span class="formw"><input type="text" size="20" id="wineName" name="wineName" value="<?php echo $_GET['wineName']; ?>"/></span>
+				<span class="formw"><input type="text" size="20" id="wineName" name="wineName" value="<?php echo $wineName; ?>"/></span>
 			</div>
 			
 			<div class="row">
                   <span class="label">Winery Name:</span>
-                  <span class="formw"><input type="text" size="20" id="wineryName" name="wineryName" value="<?php echo $_GET['wineryName']; ?>"/></span>
+                  <span class="formw"><input type="text" size="20" id="wineryName" name="wineryName" value=""/></span>
              </div>
 		
 			<div class="row">
                   <span class="label">Grape Variety:</span>
                   <span class="formw">
                      <select id ="grapeVariety" name="grapeVariety">
-                        some php code here.
+                       
                      </select>
                   </span>
              </div>
@@ -55,36 +61,36 @@
                   <span class="label">Range of Years:</span>
                   <span class="formw">
                      <select id ="startYear" name="startYear">
-                        some php code here.
+                       
                      </select>
 					 to
 					 <select id ="endYear" name="endYear">
-                        some php code here.
+                        
                      </select>
                   </span>
              </div>
 			 
-			 <?php echo "<div class='error'>".$msg_yearRang."</div>";?>
+			 <?php echo "<div class='error'>".$msg_yearRange."</div>";?>
 			 
 			 <div class="row">
                   <span class="label">Minimum Number In Stock:</span>
-                  <span class="formw"><input type="text" size="15" id="minStockNo" name="minStockNo" value="<?php echo $_GET['minStockNo']; ?>"/></span>
+                  <span class="formw"><input type="text" size="15" id="minStockNo" name="minStockNo" value=""/></span>
              </div>
 			 
 			 <div class="row">
                   <span class="label">Minimum Number Ordered:</span>
-                  <span class="formw"><input type="text" size="15" id="minOrderedNo" name="minOrderedNo" value="<?php echo $_GET['minOrderedNo']; ?>"/></span>
+                  <span class="formw"><input type="text" size="15" id="minOrderedNo" name="minOrderedNo" value=""/></span>
              </div>
-			 <?php echo "<div class='error'>".$msg_yearRang."</div>";?>
+			 
 			 
 			 <div class="row">
                   <span class="label">Cost:</span>
-                  <span class="formw">$<input type="text" size="10" id="minCost" name="minCost" value="<?php echo $_GET['minCost']; ?>"/> to $<input type="text" size="10" id="maxCost" name="maxCost" value="<?php echo $_GET['maxCost']; ?>"/></span>
+                  <span class="formw">$<input type="text" size="10" id="minCost" name="minCost" value=""/> to $<input type="text" size="10" id="maxCost" name="maxCost" value=""/></span>
              </div>
 			 <?php echo "<div class='error'>".$msg_cost."</div>";?>
 			 
 			 <div class="row">
-                  <span class="formw"><input type="submit" name="search" value="Search"/></span>
+                  <span class="formw"><input type="submit" name="submit" value="Search"/></span>
              </div>
 			 
 		</div>
