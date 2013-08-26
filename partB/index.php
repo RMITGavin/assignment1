@@ -204,7 +204,7 @@
 					 To
 					 <select id ="endYear" name="endYear">
 					<?php
-						showdropdownlist("select distinct year from wine order by year");
+						showdropdownlist("select distinct year from wine order by year desc");
 					?>
                      </select>
                   </span>
