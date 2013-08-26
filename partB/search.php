@@ -45,6 +45,12 @@
 		$minCost=trim($_GET['minCost']);
 		$maxCost=trim($_GET['maxCost']);
 		
+		if($_GET['endYear']<$_GET['startYear'])
+		{
+			$msg_cost="*Second value must equal or greater than first value";
+		}
+		echo $msg_cost;
+		
 		if($minCost==""&&!empty($maxCost))
 		{
 			if(!is_numeric($maxCost))
