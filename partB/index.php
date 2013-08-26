@@ -158,15 +158,26 @@
    	<form id="search_form" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
 		<div id="formcontainer">
 			<div class="row">
-				<span class="label">Wine Name::</span>
+				<span class="label">Wine Name(or part of a wine name):</span>
 				<span class="formw"><input type="text" size="20" id="wineName" name="wineName" value="<?php echo $wineName; ?>"/></span>
 			</div>
 			
 			<div class="row">
-                  <span class="label">Winery Name:</span>
+                  <span class="label">Winery Name(or part of a winery name):</span>
                   <span class="formw"><input type="text" size="20" id="wineryName" name="wineryName" value="<?php echo $wineryName; ?>"/></span>
              </div>
-		
+			
+			<div class="row">
+                  <span class="label">Region:</span>
+                  <span class="formw">
+					<select id ="grapeVariety" name="grapeVariety">
+					<?php
+						showdropdownlist("select region_name from region order by region_name");
+					?>
+					
+                    </select>
+                  </span>
+            </div>
 			<div class="row">
                   <span class="label">Grape Variety:</span>
                   <span class="formw">
@@ -177,17 +188,18 @@
 					
                     </select>
                   </span>
-             </div>
+            </div>
 
 			 <div class="row">
                   <span class="label">Range of Years:</span>
                   <span class="formw">
+					From
                      <select id ="startYear" name="startYear">
                     <?php
 						showdropdownlist("select distinct year from wine order by year");
 					?>
                      </select>
-					 to
+					 To
 					 <select id ="endYear" name="endYear">
 					<?php
 						showdropdownlist("select distinct year from wine order by year");
