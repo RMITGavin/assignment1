@@ -49,6 +49,8 @@
 		$endYear=$_GET['endYear'];
 		$minCost=trim($_GET['minCost']);
 		$maxCost=trim($_GET['maxCost']);
+		$region=$_GET['region'];
+		$grapeVariety=$_GET['grapeVariety'];
 		//validate year range
 		if($_GET['endYear']<$_GET['startYear'])
 		{
@@ -133,7 +135,7 @@
 		//if pass all validation then header to answer page
 		if($msg_cost=="" && $msg_yearRange==""&& $msg_minOrderedNo=="" && $msg_minStockNo=="")
 		{
-			header("Location: answer.php?wineName=".$wineName."&wineryName=".$wineryName."&minStockNo=".$minStockNo."&minOrderedNo=".$minOrderedNo."&minCost=".$minCost."&maxCost=".$maxCost."&startYear=".$startYear."&endYear=".$endYear);
+			header("Location: answer.php?wineName=".$wineName."&wineryName=".$wineryName."&region=".$region."&grapeVariety=".$grapeVariety."&minStockNo=".$minStockNo."&minOrderedNo=".$minOrderedNo."&minCost=".$minCost."&maxCost=".$maxCost."&startYear=".$startYear."&endYear=".$endYear);
 		}
 		
 	}
@@ -170,7 +172,7 @@
 			<div class="row">
                   <span class="label">Region:</span>
                   <span class="formw">
-					<select id ="grapeVariety" name="grapeVariety">
+					<select id ="region" name="region">
 					<?php
 						showdropdownlist("select region_name from region order by region_name");
 					?>
