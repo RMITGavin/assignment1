@@ -25,7 +25,8 @@
 		}	
 		mysql_close($connection); 
 	}
-	
+	$msg_minOrderedNo="";
+	$msg_minStockNo="";
 	$msg_yearRange="";
 	$msg_cost="";
 	$wineName="";
@@ -44,44 +45,96 @@
 		
 		$minCost=trim($_GET['minCost']);
 		$maxCost=trim($_GET['maxCost']);
-		
+		//validate year range
 		if($_GET['endYear']<$_GET['startYear'])
 		{
-			$msg_cost="*Second value must equal or greater than first value";
+			$msg_cost="*Second value must equal or greater than first value.";
 		}
-		echo $msg_cost;
 		
+		//validate minStockNo
+		if(!empty($minStockNo))
+		{
+		
+			if(is_numeric($minStockNo))
+			{
+				if(((int)$minStockNo)<0)
+				{
+					$msg_minStockNo="*No negative number.";
+				}
+				
+			}
+			else
+				$msg_minStockNo="*Numeric only.";
+		}
+		//validate minOrderedNo
+		if(!empty($minOrderedNo))
+		{
+			if(is_numeric($minOrderedNo))
+			{
+				if(((int)$minOrderedNo)<0)
+				{
+					$msg_minOrderedNo="*No negative number.";
+				}
+			}
+			else
+				$msg_minOrderedNo="*Numeric only.";
+		}
+		//validate cost range
 		if($minCost==""&&!empty($maxCost))
 		{
 			if(!is_numeric($maxCost))
 			{
-				$msg_cost="*Numeric only";
+				$msg_cost="*Numeric only.";
+			}
+			else
+			{
+				if((double)$maxCost<0)
+				{
+					$msg_cost="*No negative cost.";
+				}
 			}
 		}
 		if(!empty($minCost)&&$maxCost=="")
 		{
 			if(!is_numeric($minCost))
 			{
-				$msg_cost="*Numeric only";
+				$msg_cost="*Numeric only.";
+			}
+			else
+			{
+				if((double)$minCost<0)
+				{
+					$msg_cost="*No negative cost.";
+				}
 			}
 		}
 		
 		if(!empty($minCost)&&!empty($maxCost))
 		{
 			if(is_numeric($minCost)&&is_numeric($maxCost))
-			{	
+			{	if($minCost<0||$maxCost<0)
+				{
+					$msg_cost="*No negative cost.";
+				}
 				if((double)$minCost>(double)$maxCost)
 				{
-					$msg_cost="*Second value must greater than first value";
+					$msg_cost="*Second value must greater than first value.";
 				}
 			}
 			else
 			{
-				$msg_cost="*Numeric only";
+				$msg_cost="*Numeric only.";
 			}
+		}
+		//if pass all validation then header to answer page
+		if($msg_cost=="" && $msg_yearRange==""&& $msg_minOrderedNo=="" && $minStockNo=="")
+		{
+			header("Location: answer.php?wineName=".$wineName."&wineryName=".$wineryName."&minStockNo=".$minStockNo."&minOrderedNo=".$minOrderedNo."&minCost=".$minCost."&maxCost=".$maxCost."&startYear=".$startYear."&endYear=".$endYear);
 		}
 		
 	}
+	
+	
 	
 	
 	
@@ -147,12 +200,12 @@
                   <span class="label">Minimum Number In Stock:</span>
                   <span class="formw"><input type="text" size="15" id="minStockNo" name="minStockNo" value="<?php echo $minStockNo; ?>"/></span>
              </div>
-			 
+			 <?php echo "<div class='error'>".$msg_minStockNo."</div>";?>
 			 <div class="row">
                   <span class="label">Minimum Number Ordered:</span>
                   <span class="formw"><input type="text" size="15" id="minOrderedNo" name="minOrderedNo" value="<?php echo $minOrderedNo; ?>"/></span>
              </div>
-			 
+			 <?php echo "<div class='error'>".$msg_minOrderedNo."</div>";?>
 			 
 			 <div class="row">
                   <span class="label">Cost:</span>
