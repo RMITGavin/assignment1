@@ -32,9 +32,9 @@
 		// Else if the query returns results
 		if($rowsFound>0)
 		{
-			echo "<h4>$rowsFound records found matching your criteria</h4>";
+			echo "<h4>$rowsFound records found matching your criteria</h4><br/>";
 			
-			 // and start a <table>.
+			 // start a <table>.
 			print "\n<table>\n<tr>" .
 			"\n\t<th>Wine Name</th>" .
 			"\n\t<th>Grape Varieties</th>" .
@@ -46,15 +46,19 @@
 			"\n\t<th>Total Stock Sold</th>" .
 			"\n\t<th>Total Sales Revenue</th>\n</tr>";
 
-      // Fetch each of the query rows
+      // Get each of the query rows
       while ($row = @ mysql_fetch_array($result)) {
-        // Print one row of results
-        print "\n<tr>\n\t<td>{$row["wine_id"]}</td>" .
-            "\n\t<td>{$row["wine_name"]}</td>" .
+        
+        print "\n<tr>\n\t<td>{$row["wine_name"]}</td>" .
+            "\n\t<td>{$row["variety"]}</td>" .
             "\n\t<td>{$row["year"]}</td>" .
             "\n\t<td>{$row["winery_name"]}</td>" .
-            "\n\t<td>{$row["description"]}</td>\n</tr>";
-      } // end while loop body
+			"\n\t<td>{$row["region_name"]}</td>" .
+			"\n\t<td>{$row["cost"]}</td>" .
+			"\n\t<td>{$row["on_hand"]}</td>" .
+			"\n\t<td>{$row["winery_name"]}</td>" .
+            "\n\t<td>{$row["region_name"]}</td>\n</tr>";
+      } 
 		}
 		
 		mysql_close($connection); 
@@ -70,8 +74,8 @@
 	$maxCost=$_GET['maxCost'];
 	
 	//start query
-	$query = "SELECT wine_id, wine_name, description, year, winery_name
-	FROM winery, region, wine
+	$query = "SELECT wine_name, variety, year, winery_name, region_name, cost, 
+	FROM winery, region, wine, grape_variety, inventory, items
 	WHERE winery.region_id = region.region_id
 	AND wine.winery_id = winery.winery_id";
 	
