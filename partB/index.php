@@ -16,8 +16,11 @@
 		{
 			showerror();
 		}
-		//Run the query on the winestore through the connection get variety
-		$result = mysql_query($query, $connection);
+		//Run the query on the winestore
+		if (!($result = @ mysql_query ($query, $connection))) 
+		{
+			showerror();
+		}
 		//populate drop-down list
 		while ($row = mysql_fetch_row($result)) 
 		{

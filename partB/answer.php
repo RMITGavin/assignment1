@@ -1,13 +1,49 @@
 <?php
-	//get 
+	require 'db.php';
+	function showerror() 
+	{
+		die("Error " . mysql_errno() . " : " . mysql_error());
+	}
+
+	function showWineList($query)
+	{
+		// Connect to the MySQL server
+		if (!($connection = @ mysql_connect(DB_HOST, DB_USER, DB_PW))) 
+		{
+			die("Could not connect");
+		}
+		//Open the database connection
+		if (!mysql_select_db(DB_NAME, $connection)) 
+		{
+			showerror();
+		}
+		//Run the query on the winestore through the connection get variety
+		$result = mysql_query($query, $connection);
+		//populate drop-down list
+		while ($row = mysql_fetch_row($result)) 
+		{
+			echo "\n".'<option value ="' .$row[0].'">'.$row[0]."</option>";
+		}	
+		mysql_close($connection); 
+	}
+	//get data from url 
 	$wineName=$_GET['wineName'];
 	$wineryName= $_GET['wineryName'];
 	$minStockNo=$_GET['minStockNo'];
 	$minOrderedNo=$_GET['minOrderedNo'];
-	
+	$startYear=$_GET['startYear'];
+	$endYear=$_GET['endYear'];
 	$minCost=$_GET['minCost'];
 	$maxCost=$_GET['maxCost'];
-	echo $maxCost;
+	
+	//start query
+	$query = "SELECT wine_id, wine_name, description, year, winery_name
+	FROM winery, region, wine
+	WHERE winery.region_id = region.region_id
+	AND wine.winery_id = winery.winery_id";
+	
+	
+
 
 ?>
 
