@@ -17,13 +17,46 @@
 		{
 			showerror();
 		}
-		//Run the query on the winestore through the connection get variety
-		$result = mysql_query($query, $connection);
-		//populate drop-down list
-		while ($row = mysql_fetch_row($result)) 
+		//Run the query on the winestore
+		if (!($result = @ mysql_query ($query, $connection))) 
 		{
-			echo "\n".'<option value ="' .$row[0].'">'.$row[0]."</option>";
-		}	
+			showerror();
+		}
+		// Find out how many rows are found
+		$rowsFound = @ mysql_num_rows($result);
+		// If has no result
+		if($rowsFound=0)
+		{
+			echo "<h3>No records match your search criteria</h3>";
+		}
+		// Else if the query returns results
+		if($rowsFound>0)
+		{
+			echo "<h4>$rowsFound records found matching your criteria</h4>";
+			
+			 // and start a <table>.
+			print "\n<table>\n<tr>" .
+			"\n\t<th>Wine Name</th>" .
+			"\n\t<th>Grape Varieties</th>" .
+			"\n\t<th>Year</th>" .
+			"\n\t<th>Winery</th>" .
+			"\n\t<th>Region</th>" .
+			"\n\t<th>Cost</th>" .
+			"\n\t<th>Number of Bottles</th>" .
+			"\n\t<th>Total Stock Sold</th>" .
+			"\n\t<th>Total Sales Revenue</th>\n</tr>";
+
+      // Fetch each of the query rows
+      while ($row = @ mysql_fetch_array($result)) {
+        // Print one row of results
+        print "\n<tr>\n\t<td>{$row["wine_id"]}</td>" .
+            "\n\t<td>{$row["wine_name"]}</td>" .
+            "\n\t<td>{$row["year"]}</td>" .
+            "\n\t<td>{$row["winery_name"]}</td>" .
+            "\n\t<td>{$row["description"]}</td>\n</tr>";
+      } // end while loop body
+		}
+		
 		mysql_close($connection); 
 	}
 	//get data from url 
