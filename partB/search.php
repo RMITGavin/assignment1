@@ -4,7 +4,7 @@
 	{
 		die("Error " . mysql_errno() . " : " . mysql_error());
 	}
-	function showdropdownlist($querycontent)
+	function showdropdownlist($query)
 	{
 		// Connect to the MySQL server
 		if (!($connection = @ mysql_connect(DB_HOST, DB_USER, DB_PW))) 
@@ -17,7 +17,6 @@
 			showerror();
 		}
 		//Run the query on the winestore through the connection get variety
-		$query = $querycontent;
 		$result = mysql_query($query, $connection);
 		//populate drop-down list
 		while ($row = mysql_fetch_row($result)) 
@@ -41,11 +40,43 @@
 		$wineName=trim($_GET['wineName']);
 		$wineryName= trim($_GET['wineryName']);
 		$minStockNo=trim($_GET['minStockNo']);
-		$minOrderedNo=$_GET['minOrderedNo'];
+		$minOrderedNo=trim($_GET['minOrderedNo']);
 		
-		$minCost=$_GET['minCost'];
-		$maxCost=$_GET['maxCost'];
+		$minCost=trim($_GET['minCost']);
+		$maxCost=trim($_GET['maxCost']);
+		
+		if($minCost==""&&!empty($maxCost))
+		{
+			if(!is_numeric($maxCost))
+			{
+				$msg_cost="*Numeric only";
+			}
+		}
+		if(!empty($minCost)&&$maxCost=="")
+		{
+			if(!is_numeric($minCost))
+			{
+				$msg_cost="*Numeric only";
+			}
+		}
+		
+		if(!empty($minCost)&&!empty($maxCost))
+		{
+			if(is_numeric($minCost)&&is_numeric($maxCost))
+			{	
+				if((double)$minCost>(double)$maxCost)
+				{
+					$msg_cost="*Second value must greater than first value";
+				}
+			}
+			else
+			{
+				$msg_cost="*Numeric only";
+			}
+		}
+		
 	}
+	
 	
 	
   
