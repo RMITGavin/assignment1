@@ -65,7 +65,8 @@
 		}
 		
 		mysql_close($connection); 
-	}
+	}//end function
+	
 	// Get data from url 
 	$wineName=$_GET['wineName'];
 	$wineryName= $_GET['wineryName'];
@@ -89,15 +90,33 @@
 	
 	
 	// Add user input to where clause base on users' input data
+	
+	//wineName
 	if (!empty($wineName))
 	{
 		$query .= " AND wine_name LIKE '%{$wineName}%'";
 	}
-	
+	//wineryName
+	if (!empty($wineryName))
+	{
+		$query .= " AND winery_name LIKE '%{$wineryName}%'";
+	}
+	//regionName
 	if (!empty($regionName) && $regionName != "All")
 	{
 		$query .= " AND region_name = '{$regionName}'";
 	}
+	//grape variety
+	if (!empty($grapeVariety))
+	{
+		$query .= " AND variety = '{$grapeVariety}'";
+	}
+	//range year
+	if (!empty($startYear) && !empty($endYear))
+	{
+		$query .= " AND year>= '{$startYear}' AND year<= '{$endYear}'";
+	}
+	
 
 
 	
