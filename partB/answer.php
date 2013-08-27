@@ -80,45 +80,65 @@
 	$grapeVariety=$_GET['grapeVariety'];
 	
 	// Start query
-	$query = "SELECT wine_name, variety, year, winery_name, region_name, cost, on_hand, qty, qty*price as revenue
+	$query = "SELECT wine_name, variety, year, winery_name, region_name, cost, on_hand, qty, SUM(price) revenue
 	FROM winery, region, wine, grape_variety, inventory, items, wine_variety
 	WHERE wine.wine_id = inventory.wine_id 
 	AND wine.wine_id = items.wine_id 
-	AND wine.wine_id = wine_variety.wine_id AND wine_variety.variety_id = grape_variety.variety_id 
+	AND wine.wine_id = wine_variety.wine_id 
+	AND wine_variety.variety_id = grape_variety.variety_id 
 	AND winery.region_id = region.region_id
 	AND wine.winery_id = winery.winery_id";
 	
 	
 	// Add user input to where clause base on users' input data
 	
-	//wineName
+	// wineName
 	if (!empty($wineName))
 	{
 		$query .= " AND wine_name LIKE '%{$wineName}%'";
 	}
-	//wineryName
+	// wineryName
 	if (!empty($wineryName))
 	{
 		$query .= " AND winery_name LIKE '%{$wineryName}%'";
 	}
-	//regionName
+	// regionName
 	if (!empty($regionName) && $regionName != "All")
 	{
 		$query .= " AND region_name = '{$regionName}'";
 	}
-	//grape variety
+	// grape variety
 	if (!empty($grapeVariety))
 	{
 		$query .= " AND variety = '{$grapeVariety}'";
 	}
-	//range year
+	// range year
 	if (!empty($startYear) && !empty($endYear))
 	{
 		$query .= " AND year>= '{$startYear}' AND year<= '{$endYear}'";
 	}
-	
+	// minimum number of wines in stock
+	if (!empty($minStockNo))
+	{
+		$query .= " AND on_hand >= '{$minStockNo}'";
+	}
+	// minimum number of wines ordered
+	if (!empty($minOrderedNo))
+	{
+		$query .= " AND qty >= '{$minOrderedNo}'";
+	}
+	// cost range
+	if (!empty($minCost))
+	{
+		$query .= " AND cost >= '{$minCost}'";
+	}
+	if (!empty($maxCost))
+	{
+		$query .= " AND cost <= '{$maxCost}'";
+	}
 
-
+	//group item.wine_id
+	$query .= " GROUP BY items.wine_id";
 	
 
 
