@@ -89,7 +89,11 @@
 	
 	
 	// Add user input to where clause base on users' input data
-
+	if (!empty($wineName))
+	{
+		$query .= " AND wine_name LIKE '%{$wineName}%'";
+	}
+	
 	if (!empty($regionName) && $regionName != "All")
 	{
 		$query .= " AND region_name = '{$regionName}'";
