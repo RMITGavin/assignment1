@@ -56,8 +56,8 @@
 			"\n\t<td>{$row["region_name"]}</td>" .
 			"\n\t<td>{$row["cost"]}</td>" .
 			"\n\t<td>{$row["on_hand"]}</td>" .
-			"\n\t<td>{$row["winery_name"]}</td>" .
-            "\n\t<td>{$row["region_name"]}</td>\n</tr>";
+			"\n\t<td>{$row["qty"]}</td>" .
+            "\n\t<td>{$row["qty"]*$row["price"]}</td>\n</tr>";
       } 
 		}
 		
@@ -72,6 +72,8 @@
 	$endYear=$_GET['endYear'];
 	$minCost=$_GET['minCost'];
 	$maxCost=$_GET['maxCost'];
+	$region=$_GET['region'];
+	$grapeVariety=$_GET['grapeVariety'];
 	
 	//start query
 	$query = "SELECT wine_name, variety, year, winery_name, region_name, cost, 
