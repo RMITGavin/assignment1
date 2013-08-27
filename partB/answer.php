@@ -76,9 +76,12 @@
 	$grapeVariety=$_GET['grapeVariety'];
 	
 	//start query
-	$query = "SELECT wine_name, variety, year, winery_name, region_name, cost, 
-	FROM winery, region, wine, grape_variety, inventory, items
-	WHERE winery.region_id = region.region_id
+	$query = "SELECT wine_name, variety, year, winery_name, region_name, cost, on_hand, qty, qty*price
+	FROM winery, region, wine, grape_variety, inventory, items, wine_variety
+	WHERE wine.wine_id = inventory.wine_id 
+	AND wine.wine_id = items.wine_id 
+	AND wine.wine_id = wine_variety.wine_id AND wine_variety.variety_id = grape_variety.variety_id 
+	AND winery.region_id = region.region_id
 	AND wine.winery_id = winery.winery_id";
 	
 	
