@@ -13,23 +13,25 @@ div.row
 span.label 
 	{
 	float: left;
-	width: 200px;
+	width: 260px;
 	text-align: right;
 	}
 span.formw 
 	{
 	float: right;
-	width: 335px;
+	width: 280px;
 	text-align: left;
 	} 
 div.error
 	{
+	float: right;
+	width: 335px;
 	clear: both;
 	color: red;
 	}
 .auto-style2
         {
-	     text-align: center;
+	     
             color: #6666FF;
             background-color: #FFFFFF;
         }

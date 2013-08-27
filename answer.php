@@ -155,7 +155,6 @@
  
  <body>  
 	<h1 align="center"><strong><span class="auto-style2">WineStore Management</span></strong></h1>
-	<h2 align="center"><strong><span class="auto-style2">Results you are looking for:</span></strong></h2>
 	
 		<?php showWineList($query); ?>
 </body>
